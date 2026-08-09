@@ -1,5 +1,4 @@
 name: Smart Pipeline
-
 on:
   push:
 
