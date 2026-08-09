@@ -1,18 +1,17 @@
 name: Smart Pipeline
+
 on:
   push:
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Run lint
         run: echo "Running lint checks"
 
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Run tests
         run: echo "Running tests"
@@ -21,9 +20,7 @@ jobs:
     needs:
       - lint
       - test
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Identify branch type
         run: |
