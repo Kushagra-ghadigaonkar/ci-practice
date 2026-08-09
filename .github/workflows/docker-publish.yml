@@ -15,14 +15,14 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ secrets.DOCKER_USERNAME }}/myapp:latest \
+            -t ${{ vars.DOCKER_USERNAME }}/myapp:latest \
             .
 
       - name: Log in to Docker Hub
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Tag and push images
@@ -31,8 +31,8 @@ jobs:
           SHORT_SHA=$(git rev-parse --short HEAD)
 
           docker tag \
-            ${{ secrets.DOCKER_USERNAME }}/myapp:latest \
-            ${{ secrets.DOCKER_USERNAME }}/myapp:sha-$SHORT_SHA
+            ${{ vars.DOCKER_USERNAME }}/myapp:latest \
+            ${{ vars.DOCKER_USERNAME }}/myapp:sha-$SHORT_SHA
 
-          docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/myapp:sha-$SHORT_SHA
+          docker push ${{ vars.DOCKER_USERNAME }}/myapp:latest
+          docker push ${{ vars.DOCKER_USERNAME }}/myapp:sha-$SHORT_SHA
