@@ -1,5 +1,4 @@
 name: Call Reusable Build
-
 on:
   push:
     branches:
