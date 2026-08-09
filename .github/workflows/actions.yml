@@ -1,0 +1,51 @@
+name: Setup and Greet
+description: Print a greeting and system information
+
+inputs:
+  name:
+    description: "Name to greet"
+    required: true
+
+  language:
+    description: "Greeting language"
+    required: false
+    default: "en"
+
+outputs:
+  greeted:
+    description: "Whether the greeting was completed"
+    value: ${{ steps.greet.outputs.greeted }}
+
+runs:
+  using: composite
+
+  steps:
+    - name: Print greeting
+      id: greet
+      shell: bash
+      run: |
+        case "${{ inputs.language }}" in
+          en)
+            echo "Hello, ${{ inputs.name }}!"
+            ;;
+          es)
+            echo "Hola, ${{ inputs.name }}!"
+            ;;
+          fr)
+            echo "Bonjour, ${{ inputs.name }}!"
+            ;;
+          hi)
+            echo "Namaste, ${{ inputs.name }}!"
+            ;;
+          *)
+            echo "Hello, ${{ inputs.name }}!"
+            ;;
+        esac
+
+        echo "greeted=true" >> "$GITHUB_OUTPUT"
+
+    - name: Print system information
+      shell: bash
+      run: |
+        echo "Date: $(date)"
+        echo "Runner OS: $RUNNER_OS"
