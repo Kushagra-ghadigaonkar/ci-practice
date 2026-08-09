@@ -1,17 +1,10 @@
-name: PR Check
-
+name: pull-request-check
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
+  workflow_dispatch:
 
 jobs:
-  pr-check:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Print PR branch
-        run: echo "PR check running for branch: ${{ github.head_ref }}"
+    pr-check:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check branch
+          run: echo "PR check running for branch :" ${{ github.head_ref}} 
