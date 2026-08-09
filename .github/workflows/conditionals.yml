@@ -1,5 +1,4 @@
 name: Conditionals
-
 on:
   push:
   pull_request:
